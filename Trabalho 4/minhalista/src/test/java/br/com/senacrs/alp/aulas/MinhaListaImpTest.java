@@ -27,32 +27,19 @@ public class MinhaListaImpTest {
 		String arg = null;
 		
 		arg = "Valor Valido";
-		obj = new MinhaListaImp<String>(arg);
+		obj = new MinhaListaImp<String>();
 		Assert.assertNotNull(obj);
 		
 	
 	}
-	@Test
-	public void testMinhaListaImpNull() {
-		
-		MinhaListaImp<String> obj = null;
-		try {	
-		    obj = new MinhaListaImp<String>(null);
-		    fail("Not yet implemented");
-		} catch (IllegalArgumentException e) {
-			 Assert.assertTrue(true);
-		}
-		
-		
 	
-	}
 	@Test
 	public void testSufixar() {
 		
 		MinhaListaImp<String> obj = null;
 		String valor,sufixo = null;
 		
-		obj = new MinhaListaImp<String>("Inicio");
+		obj = new MinhaListaImp<String>();
 		valor = "valor";
 		
 		obj.sufixar(valor);
@@ -70,7 +57,6 @@ public class MinhaListaImpTest {
 		nodo = obj.getInicio();
 		while(nodo.getProximo()!= null) {
 			nodo = nodo.getProximo();
-			
 		}
 		resultado = nodo.getValor();
 		return resultado;
@@ -78,36 +64,86 @@ public class MinhaListaImpTest {
 
 	@Test
 	public void testPrefixar() {
-		fail("Not yet implemented");
+		
+		MinhaListaImp<String> obj = null;
+		obj = new MinhaListaImp<String>();
+		
+		String valorInserir,obterUltimoValor , ValorPrefixar = null;
+		int posicao;
+		
+		posicao = 0;
+		valorInserir = "Valor";
+		ValorPrefixar = "prefixar";
+		
+		obj.inserir(posicao, valorInserir);
+		obj.prefixar(ValorPrefixar);
+	    obterUltimoValor = buscar(posicao +1 , obj);
+		Assert.assertEquals(ValorPrefixar, obterUltimoValor);
+		
 	}
 
 	@Test
 	public void testBuscar() {
-		fail("Not yet implemented");
+	
+		MinhaListaImp<String> obj = null;
+		obj = new MinhaListaImp<String>();
+       
+		 String valor,valorEncontrado = null;
+		 int posicao ;
+		 
+		 valor = "valor Inserido";
+		 posicao = 1;
+		 
+		
+		obj.inserir(posicao, valor);
+		
+		valorEncontrado = obj.buscar(posicao -1);
+		
+		Assert.assertEquals(valor, valorEncontrado);
 	}
 
 	@Test
 	public void testInserir() {
 		
 		MinhaListaImp<String> obj = null;
-		obj = new MinhaListaImp<String>("0");
+		obj = new MinhaListaImp<String>();
 		
-		String valorInserir,sufixar = null;
+		String valorInserir,obterUltimoValor = null;
+		int posicao;
 		
-		int x = (int) Math.random();
+		posicao = 1;
+		valorInserir = "Valor";
 		
-		valorInserir = String.valueOf(x);
+		obj.inserir(posicao, valorInserir);
+	    obterUltimoValor = buscar(posicao , obj);
+		Assert.assertEquals(valorInserir, obterUltimoValor);
 		
-		obj.inserir(1, valorInserir);
-		
-		sufixar = obterSufixo(obj);
-		
-		Assert.assertEquals(valorInserir, sufixar);
+	}
+
+	private String buscar(int posicao , MinhaListaImp<String> obj) {
+       
+		Nodo<String> nodo = buscarNodo(obj , posicao);
+		return nodo.getValor();
 	}
 
 	@Test
 	public void testRemover() {
-		fail("Not yet implemented");
+		
+		MinhaListaImp<String> obj = null;
+		obj = new MinhaListaImp<String>();
+		
+		String valorInserir,obterUltimoValor,novoValor = null;
+		int posicao;
+		
+		posicao = 0;
+		valorInserir = "Valor";
+		
+		obj.inserir(posicao, valorInserir);
+		obj.remover(posicao);
+		
+	    obterUltimoValor = buscar(0 , obj);
+	    
+		Assert.assertNotSame(valorInserir, obterUltimoValor);
 	}
 
 	@Test
@@ -115,11 +151,11 @@ public class MinhaListaImpTest {
 		
 		MinhaListaImp<String> obj = null;
 		
-		obj = new MinhaListaImp<String>("0");
+		obj = new MinhaListaImp<String>();
 		
 		int valorTamanho = 0;
 		
-		int contador = 1;
+		int contador = 0;
 		
 		for(int i = 0 ; i<10 ;i++){
 			InserirDadosList(String.valueOf(i),obj,i);
